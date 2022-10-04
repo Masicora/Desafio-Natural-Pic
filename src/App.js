@@ -1,7 +1,3 @@
-// FRANCISCO, ESTE DESAFÍO ME HA SUPERADO POR LA COMPLEJIDAD QUE POSEE. LO QUE SÍ, HE CUMPLIDO CON CREAR EL CONTEXTO, PROVEERLO Y LLAMARLO DESDE ALGUNOS COMPONENTES. LA PÁGINA NO FUNCIONA. QUIZÁ SERÍA BUENO QUE COMPARTIERAS TU CÓDIGO EL DÍA MIÉRCOLES Y NOS ENSEÑARAS QUÉ HICISTE EN CADA COMPONENTE PARA QUE PODAMOS APRENDER. GRACIAS.
-
-
-
 import "./styles.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Context from "./Context";
@@ -14,12 +10,20 @@ import { useState } from "react";
 export default function App() {
   const [fotos, setFotos] = useState([]);
 
-  // ESTA PARTE FALTA RESOLVER PERO ME HE RENDIDO
   async function getFotos() {
     const endpoint = "./fotos.json";
-    const response = await fetch(endpoint);
-    const photos = await response.photos;
-    setFotos(photos);
+    const respuesta = await fetch(endpoint);
+    let { fotosjson } = await respuesta.json();
+
+    fotosjson = fotosjson.map((foto) => ({
+      src: foto.src.tiny,
+      id: foto.id,
+      favorite: false,
+      description: foto.alt,
+
+    }));
+
+    setFotos(fotosjson);
   };
 
   useEffect(() => { getFotos(); }, []);

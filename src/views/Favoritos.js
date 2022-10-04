@@ -4,8 +4,8 @@ import { useContext } from "react";
 export default function Favoritos() {
   const { fotos, setFotos } = useContext(Context);
 
-  const borrar = (x) => {
-    const indice = fotos.findIndex((f) => f.x === x);
+  const borrar = (id) => {
+    const indice = fotos.findIndex((f) => f.id === id);
     fotos.splice(indice, 1);
     setFotos([...fotos]);
   };

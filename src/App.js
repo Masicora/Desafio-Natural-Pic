@@ -9,13 +9,13 @@ import { useState } from "react";
 
 export default function App() {
   const [fotos, setFotos] = useState([]);
+  const endpoint = "./fotos.json";
+  const getFotos = async () => {
 
-  async function getFotos() {
-    const endpoint = "./fotos.json";
     const respuesta = await fetch(endpoint);
-    let { fotosjson } = await respuesta.json();
+    let { photos } = await respuesta.json();
 
-    fotosjson = fotosjson.map((foto) => ({
+    photos = photos.map((foto) => ({
       src: foto.src.tiny,
       id: foto.id,
       favorite: false,
@@ -23,7 +23,7 @@ export default function App() {
 
     }));
 
-    setFotos(fotosjson);
+    setFotos(photos);
   };
 
   useEffect(() => { getFotos(); }, []);

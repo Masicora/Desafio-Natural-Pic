@@ -6,8 +6,8 @@ import { useContext } from "react";
 export default function Home() {
   const { fotos, setFotos } = useContext(Context);
 
-  const Favorito = (x) => {
-    const indice = fotos.findIndex((f) => f.x === x);
+  const Favorito = (id) => {
+    const indice = fotos.findIndex((f) => f.id === id);
     fotos[indice].favorite = !fotos[indice].favorite;
     setFotos([...fotos]);
   };
